@@ -1,0 +1,15 @@
+{
+  "env": {
+    "CONNECTION_STRING": "<ENTER YOUR CONNECTION STRING>",
+    "PORT": "<PORT>",
+    "SECRET_KEY": "<SECRET_KEY>",
+    "USER": "<EMAIL ADDRESS>",
+    "PASS": "<PASSWORD>",
+    "HOST": "<HOST>",
+    "BASE_URL": "<BASE URL>",
+    "CORS_ORIGIN_URL": "<CLIENT_BASE_URL>"
+  },
+  "watch": ["src"],
+  "ext": "ts,json",
+  "exec": "ts-node ./src/app.ts"
+}
