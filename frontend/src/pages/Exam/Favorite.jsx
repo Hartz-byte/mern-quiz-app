@@ -1,36 +1,47 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Pic1 from "../../assets/1.png";
 import Pic2 from "../../assets/2.png";
 
-function Reports() {
-  const params = useParams();
+function Favorite() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const reportId = params?.reportId;
   const token = location?.state?.token;
   const headers = { Authorization: `Bearer ${token}` };
 
-  const [report, setReport] = useState();
-  const [quizId, setQuizId] = useState("");
+  const [flag, setFlag] = useState(false);
+  const [favQues, setFavQues] = useState();
   const [isLoading, setIsLoading] = useState(true);
+
+  function handleRemoveFavouriteClick(id, e) {
+    setIsLoading(true);
+    axios
+      .delete(`http://localhost:3002/favquestion/${id}`, { headers })
+      .then(() => {
+        setIsLoading(false);
+        setFlag(!flag);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        navigate("/auth/login");
+      });
+  }
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/report/${reportId}`, { headers })
+      .get("http://localhost:3002/favquestion", { headers })
       .then((response) => {
         setIsLoading(false);
-        setReport(response?.data?.data);
-        setQuizId(response?.data?.data?.quizId);
+        setFavQues(response?.data?.data?.favQues);
       })
       .catch((error) => {
         setIsLoading(false);
         navigate("/auth/login");
       });
-  }, [quizId]);
+  }, [flag]);
 
   if (!token) {
     navigate("/");
@@ -107,6 +118,7 @@ function Reports() {
             padding: "5px 10px",
             cursor: "pointer",
             borderRadius: "7px",
+            backgroundColor: "#FFF261",
           }}
         >
           Favorites
@@ -144,7 +156,7 @@ function Reports() {
       {/* main container */}
       <div
         style={{
-          width: "30%",
+          width: "50%",
           height: "100%",
           backgroundColor: "#e0e1dd",
           borderRadius: "15px",
@@ -152,41 +164,67 @@ function Reports() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "180px",
         }}
       >
-        <div>
-          <h2 style={{ color: "#333652" }}>Quiz App</h2>
+        <h2 style={{ color: "#333652" }}>Quiz App</h2>
 
-          <div>
-            <h2 style={{ color: "#333652" }}>Report</h2>
-            {!!report && (
-              <div style={{ marginBottom: "20px" }}>
-                <div>
+        <div>
+          {!!favQues &&
+            favQues.length !== 0 &&
+            favQues.map((list, i) => {
+              return (
+                <div key={list.question}>
                   <div>
-                    <label>Status: </label>
-                    <label style={{ fontWeight: "bold" }}>
-                      {report.result}
-                    </label>
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <p>Question {i + 1}:</p>
+                      <p>{list.question}</p>
+                    </div>
                   </div>
-                  <div>
-                    <label>Marks: </label>
-                    <label>
-                      {report.score}/{report.total}
-                    </label>
-                  </div>
-                  <div>
-                    <label>Percentage: </label>
-                    <label>{report.percentage}%</label>
-                  </div>
+                  {!!list.options && (
+                    <div>
+                      <p>Options:</p>
+                      {Object.keys(list.options).map(function (key) {
+                        return (
+                          <div key={key} style={{ display: "flex", gap: 10 }}>
+                            <p>{key}:</p>
+                            <p>{list.options[key]}</p>
+                          </div>
+                        );
+                      })}
+                      <div>
+                        <button
+                          onClick={(e) =>
+                            handleRemoveFavouriteClick(list._id, e)
+                          }
+                          style={{
+                            marginBottom: "10px",
+                            borderRadius: "4px",
+                            backgroundColor: "#333652",
+                            color: "white",
+                            padding: "5px",
+                            cursor: "pointer",
+                            marginLeft: "100px",
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
+              );
+            })}
+          {!!favQues && favQues.length === 0 && (
+            <div>
+              <div>
+                <h4 style={{ color: "#333652" }}>No question added!</h4>
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-export default Reports;
+export default Favorite;

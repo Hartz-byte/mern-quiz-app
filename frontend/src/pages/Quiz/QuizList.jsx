@@ -108,9 +108,24 @@ function QuizList() {
             padding: "5px 10px",
             cursor: "pointer",
             borderRadius: "7px",
+            backgroundColor: "#FFF261",
           }}
         >
           Quizzes
+        </button>
+
+        <button
+          onClick={() => {
+            navigate("/favorite", { state: { token } });
+          }}
+          style={{
+            width: "100px",
+            padding: "5px 10px",
+            cursor: "pointer",
+            borderRadius: "7px",
+          }}
+        >
+          Favorites
         </button>
 
         <button

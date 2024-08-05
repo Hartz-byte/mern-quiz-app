@@ -49,7 +49,7 @@ const Home = () => {
           justifyContent: "center",
           alignItems: "center",
           gap: "10px",
-          marginTop: "150px",
+          marginTop: "70px",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
@@ -93,6 +93,21 @@ const Home = () => {
           }}
         >
           Create Quiz
+        </button>
+
+        <button
+          onClick={() => {
+            navigate("/favorite", { state: { token } });
+          }}
+          style={{
+            width: "150px",
+            height: "50px",
+            padding: "5px 10px",
+            cursor: "pointer",
+            borderRadius: "7px",
+          }}
+        >
+          Favorites
         </button>
 
         <button

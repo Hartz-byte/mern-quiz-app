@@ -14,6 +14,7 @@ import ChangeName from "../pages/Auth/ChangeName";
 import ChangePassword from "../pages/Auth/ChangePassword";
 import Deactivate from "../pages/Auth/Deactivate";
 import PublishQuiz from "../pages/Quiz/PublishQuiz";
+import Favorite from "../pages/Exam/Favorite";
 
 const Navigation = () => {
   return (
@@ -33,6 +34,7 @@ const Navigation = () => {
       <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/deactivate" element={<Deactivate />} />
       <Route path="/publish-quiz" element={<PublishQuiz />} />
+      <Route path="/favorite" element={<Favorite />} />
     </Routes>
   );
 };

@@ -260,6 +260,19 @@ function ExamPlay() {
         </div>
         <div>
           <h2 style={{ color: "#333652" }}>{quiz?.name}</h2>
+
+          {/* border */}
+          <div
+            style={{
+              width: "671px",
+              height: "1px",
+              backgroundColor: "white",
+              position: "absolute",
+              left: "27.9%",
+              marginTop: "10px",
+            }}
+          />
+
           {!!quiz &&
             quiz?.questionList.map((list) => {
               return (
@@ -267,7 +280,7 @@ function ExamPlay() {
                   <div>
                     <div>
                       <div>
-                        <h4 style={{ color: "red" }}>
+                        <h4 style={{ color: "red", marginTop: "50px" }}>
                           Question {list.questionNumber}:
                         </h4>
                         <p>{list.question}</p>
@@ -363,6 +376,7 @@ function ExamPlay() {
               </ul>
             </div>
           )}
+
           {/* border */}
           <div
             style={{

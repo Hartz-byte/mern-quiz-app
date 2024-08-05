@@ -1,4 +1,4 @@
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -414,6 +414,20 @@ function CreateQuiz() {
           }}
         >
           Quizzes
+        </button>
+
+        <button
+          onClick={() => {
+            navigate("/favorite", { state: { token } });
+          }}
+          style={{
+            width: "100px",
+            padding: "5px 10px",
+            cursor: "pointer",
+            borderRadius: "7px",
+          }}
+        >
+          Favorites
         </button>
 
         <button

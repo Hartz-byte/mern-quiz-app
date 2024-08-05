@@ -1,13 +1,13 @@
 {
   "env": {
-    "CONNECTION_STRING": "<ENTER YOUR CONNECTION STRING>",
-    "PORT": "<PORT>",
-    "SECRET_KEY": "<SECRET_KEY>",
-    "USER": "<EMAIL ADDRESS>",
-    "PASS": "<PASSWORD>",
-    "HOST": "<HOST>",
-    "BASE_URL": "<BASE URL>",
-    "CORS_ORIGIN_URL": "<CLIENT_BASE_URL>"
+    "CONNECTION_STRING": "<DATABASE_CONNECTION_STRING>",
+    "PORT": 3002,
+    "SECRET_KEY": "<ENCRYPTION_SECRET>",
+    "USER": "<USER_EMAIL>",
+    "PASS": "<USER_PASSWORD>",
+    "HOST": "<SERVICE_PROVIDER>",
+    "BASE_URL": "<SERVER_BASE_URL>",
+    "CORS_ORIGIN_URL":"<CLIENT_BASE_URL>"
   },
   "watch": ["src"],
   "ext": "ts,json",
